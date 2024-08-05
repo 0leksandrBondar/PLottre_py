@@ -128,4 +128,3 @@ def update_slider_data(slider, data):
         slider.set_val((all_timestamps.min(), all_timestamps.max()))
         slider.valtext.set_text(format_time(slider.val[0]) + ' - ' + format_time(slider.val[1]))
         slider.ax.set_xlim(all_timestamps.min(), all_timestamps.max())
-        plt.draw()

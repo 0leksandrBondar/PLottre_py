@@ -18,6 +18,7 @@ class Graph:
 class GraphController:
     graph_list = []
     change_callback = None
+    active_graph = None
 
     def add(self, graph: Graph):
         self.graph_list.append(graph)

@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 
-from ui.widgets import create_plot_toolbar
+from ui.widgets import *
 
 
 def initialize_plot(fig, ax, graphs, plot_frame):
