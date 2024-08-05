@@ -51,7 +51,9 @@ def get_file_name(file_path):
 
 
 def add_file(file: str):
-    graphController.add(Graph(debug_vect_from_tlog(file), DataRange(0, 100), get_file_name(file)))
+    data = debug_vect_from_tlog(file)
+    all_timestamps = data[:, 0]
+    graphController.add(Graph(data, DataRange(all_timestamps.min(), all_timestamps.max()), get_file_name(file)))
 
 
 def get_dictionary(file: str):

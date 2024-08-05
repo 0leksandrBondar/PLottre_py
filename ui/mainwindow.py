@@ -14,6 +14,7 @@ def init_main_window():
     list_widgets_frame = create_list_widgets_frame(bottom_frame)
 
     fig, ax = create_plot_widget(plot_frame)
+    create_plot_toolbar(plot_frame, fig)
     slider = create_empty_slider(ax)
     load_button = create_load_button(list_widgets_frame)
     loaded_files_list_widget = create_loaded_files_list_widget(list_widgets_frame)
@@ -23,13 +24,13 @@ def init_main_window():
 
     graphController.on_change(lambda: update_plot(fig, ax, plot_frame))
 
-    slider.on_changed(lambda val: update(val, ax, slider, graphController.active_graph))
+    slider.on_changed(lambda val: update(val))
 
     loaded_files_list_widget.bind('<<ListboxSelect>>',
                                   lambda event: add_to_displayed_list(loaded_files_list_widget,
                                                                       displayed_graph_list_widget))
 
     displayed_graph_list_widget.bind('<<ListboxSelect>>',
-                                     lambda event: update_slider(ax, displayed_graph_list_widget, slider))
+                                     lambda event: update_slider(displayed_graph_list_widget, slider))
 
     window.mainloop()

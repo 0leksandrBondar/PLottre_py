@@ -1,7 +1,7 @@
 class DataRange:
-    def __init__(self, min, max):
-        self.min = min
-        self.max = max
+    def __init__(self, minimum, maximum):
+        self.minimum = minimum
+        self.maximum = maximum
 
 
 class Graph:
@@ -45,6 +45,15 @@ class GraphController:
                 visible_graphs.append(graph)
         return visible_graphs
 
+    def set_active_graph(self, graph_name: str):
+        graph = self.get_graph(graph_name)
+        if graph:
+            self.active_graph = graph
+
+    def set_active_graph_range(self, data_range: DataRange):
+        if self.active_graph:
+            self.active_graph.data_range = data_range
+            self.update()
 
     def get_graph(self, graph_name: str):
         for graph in self.graph_list:

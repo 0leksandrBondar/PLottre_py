@@ -6,7 +6,7 @@ from matplotlib.backends._backend_tk import NavigationToolbar2Tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.widgets import RangeSlider
 
-from model.graph import graphController
+from model.graph import *
 
 
 def configure_grid_weights(root, plot_frame):
@@ -120,11 +120,13 @@ def create_empty_slider(ax):
     return slider
 
 
-def update_slider_data(slider, data):
-    if data.size > 0:
+def update_slider_data(slider):
+    graph = graphController.active_graph
+    if graph:
+        data = graph.graph_data
         all_timestamps = data[:, 0]
         slider.valmin = all_timestamps.min()
         slider.valmax = all_timestamps.max()
-        slider.set_val((all_timestamps.min(), all_timestamps.max()))
-        slider.valtext.set_text(format_time(slider.val[0]) + ' - ' + format_time(slider.val[1]))
         slider.ax.set_xlim(all_timestamps.min(), all_timestamps.max())
+        slider.set_val((graph.data_range.minimum, graph.data_range.maximum))
+        slider.valtext.set_text(format_time(slider.val[0]) + ' - ' + format_time(slider.val[1]))
