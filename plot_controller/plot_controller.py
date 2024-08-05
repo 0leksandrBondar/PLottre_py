@@ -4,7 +4,7 @@ from ui.widgets import create_plot_toolbar
 
 
 def initialize_plot(fig, ax, graphs, plot_frame):
-    plt.cla()
+    #plt.cla()
 
     lines = []
     for graph in graphs:
@@ -28,4 +28,3 @@ def initialize_plot(fig, ax, graphs, plot_frame):
     ax.relim()
     ax.autoscale_view()
     plt.grid(True)
-    plt.draw()

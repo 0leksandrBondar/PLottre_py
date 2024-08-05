@@ -20,6 +20,7 @@ def init_main_window():
     displayed_graph_list_widget = create_displayed_graph_list_widget(list_widgets_frame)
 
     fig, ax = create_plot_widget(plot_frame)
+    slider = create_empty_slider(ax)
 
     def update_plot():
         visible_graphs = graphController.get_visible_graphs()
@@ -29,6 +30,7 @@ def init_main_window():
     def foo2():
         selected_displayed_files_name = displayed_graph_list_widget.get(displayed_graph_list_widget.curselection())
         temp = graphController.get_graph(selected_displayed_files_name)
+        update_slider_data(slider, temp.graph_data)
 
     graphController.on_change(lambda: update_plot())
 
@@ -36,7 +38,7 @@ def init_main_window():
                                   lambda event: add_to_displayed_list(loaded_files_list_widget,
                                                                       displayed_graph_list_widget))
 
-    #displayed_graph_list_widget.bind('<<ListboxSelect>>', lambda event: foo2())
+    displayed_graph_list_widget.bind('<<ListboxSelect>>', lambda event: foo2())
 
     configure_grid_weights(window, plot_frame)
 

@@ -1,8 +1,10 @@
 import tkinter as tk
+import datetime
 
 from matplotlib import pyplot as plt
 from matplotlib.backends._backend_tk import NavigationToolbar2Tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.widgets import RangeSlider
 
 from model.graph import graphController
 
@@ -87,7 +89,6 @@ def create_plot_widget(parent_frame):
     ax.set_xlabel('Расстояние до точки дома (м)')
     ax.set_ylabel('Значение')
     ax.set_title('График данных DEBUG_VECT по расстоянию до точки дома')
-    ax.legend()
     ax.grid(True)
 
     plot_widget = FigureCanvasTkAgg(fig, master=parent_frame)
@@ -107,3 +108,24 @@ def create_plot_toolbar(parent_frame, fig):
     toolbar = NavigationToolbar2Tk(plot_widget, toolbar_frame)
     toolbar.update()
     toolbar.pack(side=tk.TOP, fill=tk.X)
+
+
+def format_time(t):
+    return datetime.datetime.fromtimestamp(t).strftime('%Y-%m-%d %H:%M:%S')
+
+
+def create_empty_slider(ax):
+    ax_slider = plt.axes([0.2, 0.02, 0.65, 0.03], facecolor='lightgoldenrodyellow')
+    slider = RangeSlider(ax_slider, 'Время', 0, 1, valinit=(0, 1))
+    return slider
+
+
+def update_slider_data(slider, data):
+    if data.size > 0:
+        all_timestamps = data[:, 0]
+        slider.valmin = all_timestamps.min()
+        slider.valmax = all_timestamps.max()
+        slider.set_val((all_timestamps.min(), all_timestamps.max()))
+        slider.valtext.set_text(format_time(slider.val[0]) + ' - ' + format_time(slider.val[1]))
+        slider.ax.set_xlim(all_timestamps.min(), all_timestamps.max())
+        plt.draw()
