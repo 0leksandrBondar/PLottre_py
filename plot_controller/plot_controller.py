@@ -4,8 +4,7 @@ from ui.widgets import create_plot_toolbar
 
 
 def initialize_plot(fig, ax, graphs, plot_frame):
-    #plt.cla()
-
+    ax.cla()
     lines = []
     for graph in graphs:
         distance_to_home = graph.graph_data[:,1]
@@ -27,4 +26,4 @@ def initialize_plot(fig, ax, graphs, plot_frame):
     create_plot_toolbar(plot_frame, fig)
     ax.relim()
     ax.autoscale_view()
-    plt.grid(True)
+    ax.grid(True)
