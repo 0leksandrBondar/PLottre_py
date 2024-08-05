@@ -1,6 +1,6 @@
 from ui.widgets import *
 from utils.data_provider import process_load
-from plot_controller.plot_controller import initialize_plot
+from utils.plot_utils import *
 
 
 def init_main_window():
@@ -22,23 +22,13 @@ def init_main_window():
     fig, ax = create_plot_widget(plot_frame)
     slider = create_empty_slider(ax)
 
-    def update_plot():
-        visible_graphs = graphController.get_visible_graphs()
-        graphs = [graph for graph in visible_graphs]
-        initialize_plot(fig, ax, graphs, plot_frame)
-
-    def foo2():
-        selected_displayed_files_name = displayed_graph_list_widget.get(displayed_graph_list_widget.curselection())
-        temp = graphController.get_graph(selected_displayed_files_name)
-        update_slider_data(slider, temp.graph_data)
-
-    graphController.on_change(lambda: update_plot())
+    graphController.on_change(lambda: update_plot(fig, ax, plot_frame))
 
     loaded_files_list_widget.bind('<<ListboxSelect>>',
                                   lambda event: add_to_displayed_list(loaded_files_list_widget,
                                                                       displayed_graph_list_widget))
 
-    displayed_graph_list_widget.bind('<<ListboxSelect>>', lambda event: foo2())
+    displayed_graph_list_widget.bind('<<ListboxSelect>>', lambda event: update_slider(displayed_graph_list_widget, slider))
 
     configure_grid_weights(window, plot_frame)
 
