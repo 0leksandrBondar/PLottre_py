@@ -37,6 +37,14 @@ class GraphController:
             graph.visible = visible
             self.update()
 
+    def get_visible_graphs(self):
+        visible_graphs = []
+        for graph in self.graph_list:
+            if graph.visible:
+                visible_graphs.append(graph)
+        return visible_graphs
+
+
     def get_graph(self, graph_name: str):
         for graph in self.graph_list:
             if graph.graph_name == graph_name:

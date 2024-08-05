@@ -47,18 +47,17 @@ def create_loaded_files_list_widget(time_frame):
     return listbox
 
 
-def create_load_button(time_frame, listbox, plot_frame):
+def create_load_button(time_frame):
     btn_open = tk.Button(
         time_frame,
         text="Load files",
-        # command=lambda: open_file_dialog(listbox, plot_frame)
     )
     btn_open.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
     return btn_open
 
 
 def create_displayed_graph_list_widget(bottom_frame):
-    displayed_graph_list_widget = tk.Listbox(bottom_frame, exportselection=False, selectmode=tk.MULTIPLE, width=80,
+    displayed_graph_list_widget = tk.Listbox(bottom_frame, exportselection=False, selectmode=tk.SINGLE, width=80,
                                              height=10)
     displayed_graph_list_widget.user_data = []
     displayed_graph_list_widget.grid(row=0, column=2, columnspan=2, padx=5, pady=5)

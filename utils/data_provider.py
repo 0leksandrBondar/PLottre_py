@@ -46,8 +46,6 @@ def debug_vect_from_tlog(log_file):
     return np.array(selected_data)
 
 
-# files_dict = {}
-
 def get_file_name(file_path):
     return file_path.split("/")[-1]
 
