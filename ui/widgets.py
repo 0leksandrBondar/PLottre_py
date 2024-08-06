@@ -58,9 +58,7 @@ def create_load_button(time_frame):
     return btn_open
 
 
-def create_check_buttons(check_frame, ax):
-    vars = [tk.BooleanVar(value=True) for _ in range(3)]
-
+def create_check_buttons(check_frame, ax, vars):
     checkbuttons = [
         tk.Checkbutton(check_frame, text="x_ang", variable=vars[0],
                        command=lambda: update_line_visibility(ax, vars, 0)),

@@ -1,14 +1,14 @@
 import matplotlib.pyplot as plt
 
 
-def initialize_plot(ax, graphs):
+def initialize_plot(ax, graphs, vars):
     ax.cla()
     lines = []
     for graph in graphs:
         t_min = graph.data_range.minimum
         t_max = graph.data_range.maximum
         timestamps = graph.graph_data[:, 0]
-        distance_to_home = graph.graph_data[:,1]
+        distance_to_home = graph.graph_data[:, 1]
         x_ang = graph.graph_data[:, 2]
         y_ang = graph.graph_data[:, 3]
         RSSI = graph.graph_data[:, 4]
@@ -29,4 +29,12 @@ def initialize_plot(ax, graphs):
     ax.relim()
     ax.autoscale_view()
     ax.grid(True)
-    plt.draw()
+
+    # Установите видимость линий в соответствии с состоянием чекбоксов
+    for i, line in enumerate(lines):
+        if vars[i % 3].get():
+            line.set_visible(True)
+        else:
+            line.set_visible(False)
+
+    ax.figure.canvas.draw_idle()

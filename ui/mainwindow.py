@@ -12,20 +12,21 @@ def init_main_window():
     bottom_frame = create_bottom_frame(window)
     checkbox_frame = create_check_frame(bottom_frame)
     list_widgets_frame = create_list_widgets_frame(bottom_frame)
+    vars = [tk.BooleanVar(value=True) for _ in range(3)]
 
     fig, ax = create_plot_widget(plot_frame)
     create_plot_toolbar(plot_frame, fig)
     slider = create_empty_slider(ax)
     load_button = create_load_button(list_widgets_frame)
 
-    create_check_buttons(checkbox_frame, ax)
+    create_check_buttons(checkbox_frame, ax, vars)
 
     loaded_files_list_widget = create_loaded_files_list_widget(list_widgets_frame)
     displayed_graph_list_widget = create_displayed_graph_list_widget(list_widgets_frame)
 
     load_button.bind('<ButtonRelease-1>', lambda event: process_load(loaded_files_list_widget))
 
-    graphController.on_change(lambda: update_plot(ax))
+    graphController.on_change(lambda: update_plot(ax, vars))
 
     slider.on_changed(lambda val: update(val, slider))
 

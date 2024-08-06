@@ -19,14 +19,7 @@ class GraphController:
     graph_list = []
     change_callback = None
     active_graph = None
-    visible_states = {'x_ang': True, 'y_ang': True, 'RSSI': True}
 
-    def set_visibility(self, line_type, visible):
-        self.visible_states[line_type] = visible
-        self.update()
-
-    def get_visibility(self, line_type):
-        return self.visible_states.get(line_type, True)
 
     def add(self, graph: Graph):
         self.graph_list.append(graph)

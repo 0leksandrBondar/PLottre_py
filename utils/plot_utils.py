@@ -5,10 +5,10 @@ from ui.widgets import update_slider_data
 import datetime
 
 
-def update_plot(ax):
+def update_plot(ax, vars):
     visible_graphs = graphController.get_visible_graphs()
     graphs = [graph for graph in visible_graphs]
-    initialize_plot(ax, graphs)
+    initialize_plot(ax, graphs, vars)
 
 
 def format_time(t):
