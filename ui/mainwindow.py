@@ -22,13 +22,12 @@ def init_main_window():
 
     load_button.bind('<ButtonRelease-1>', lambda event: process_load(loaded_files_list_widget))
 
-    graphController.on_change(lambda: update_plot(fig, ax, plot_frame))
+    graphController.on_change(lambda: update_plot(ax))
 
-    slider.on_changed(lambda val: update(val))
+    slider.on_changed(lambda val: update(val, slider))
 
     loaded_files_list_widget.bind('<<ListboxSelect>>',
-                                  lambda event: add_to_displayed_list(loaded_files_list_widget,
-                                                                      displayed_graph_list_widget))
+                                  lambda event: add_to_displayed_list(loaded_files_list_widget, displayed_graph_list_widget))
 
     displayed_graph_list_widget.bind('<<ListboxSelect>>',
                                      lambda event: update_slider(displayed_graph_list_widget, slider))

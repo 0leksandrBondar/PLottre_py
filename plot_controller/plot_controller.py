@@ -1,9 +1,7 @@
-from matplotlib import pyplot as plt
-
-from ui.widgets import *
+import matplotlib.pyplot as plt
 
 
-def initialize_plot(fig, ax, graphs, plot_frame):
+def initialize_plot(ax, graphs):
     ax.cla()
     lines = []
     for graph in graphs:
@@ -28,6 +26,7 @@ def initialize_plot(fig, ax, graphs, plot_frame):
     if lines:
         ax.legend()
 
-    # ax.relim()
+    ax.relim()
     ax.autoscale_view()
     ax.grid(True)
+    plt.draw()
