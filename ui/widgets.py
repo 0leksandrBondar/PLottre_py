@@ -58,20 +58,26 @@ def create_load_button(time_frame):
     return btn_open
 
 
-def create_check_buttons(check_frame):
-    var_x_ang = tk.BooleanVar(value=True)
-    var_y_ang = tk.BooleanVar(value=True)
-    var_RSSI = tk.BooleanVar(value=True)
+def create_check_buttons(check_frame, ax):
+    vars = [tk.BooleanVar(value=True) for _ in range(3)]
+
     checkbuttons = [
-        tk.Checkbutton(check_frame, text="x_ang", variable=var_x_ang),
-        tk.Checkbutton(check_frame, text="y_ang", variable=var_y_ang),
-        tk.Checkbutton(check_frame, text="RSSI", variable=var_RSSI),
+        tk.Checkbutton(check_frame, text="x_ang", variable=vars[0],
+                       command=lambda: update_line_visibility(ax, vars, 0)),
+        tk.Checkbutton(check_frame, text="y_ang", variable=vars[1],
+                       command=lambda: update_line_visibility(ax, vars, 1)),
+        tk.Checkbutton(check_frame, text="RSSI", variable=vars[2],
+                       command=lambda: update_line_visibility(ax, vars, 2))
     ]
 
-    for i, button in enumerate(checkbuttons):
-        button.grid(row=i, column=0, sticky='w', padx=5, pady=2)
+    for i, cb in enumerate(checkbuttons):
+        cb.grid(row=i, column=0, sticky='w')
 
-    return checkbuttons
+
+def update_line_visibility(ax, vars, index):
+    for line in ax.lines[index::3]:
+        line.set_visible(vars[index].get())
+    ax.figure.canvas.draw_idle()
 
 
 def create_displayed_graph_list_widget(bottom_frame):

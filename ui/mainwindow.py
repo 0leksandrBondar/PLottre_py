@@ -17,7 +17,9 @@ def init_main_window():
     create_plot_toolbar(plot_frame, fig)
     slider = create_empty_slider(ax)
     load_button = create_load_button(list_widgets_frame)
-    checkbox_buttons = create_check_buttons(checkbox_frame)
+
+    create_check_buttons(checkbox_frame, ax)
+
     loaded_files_list_widget = create_loaded_files_list_widget(list_widgets_frame)
     displayed_graph_list_widget = create_displayed_graph_list_widget(list_widgets_frame)
 
@@ -34,3 +36,4 @@ def init_main_window():
                                      lambda event: update_slider(displayed_graph_list_widget, slider))
 
     window.mainloop()
+
