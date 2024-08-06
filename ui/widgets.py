@@ -73,8 +73,19 @@ def create_check_buttons(check_frame, ax, vars):
 
 
 def update_line_visibility(ax, vars, index):
-    for line in ax.lines[index::3]:
-        line.set_visible(vars[index].get())
+    # Обновляем видимость линий в зависимости от состояния чекбоксов
+    for i, line in enumerate(ax.lines):
+        if i % 3 == index:
+            line.set_visible(vars[index].get())
+
+    # Обновляем легенду
+    handles, labels = [], []
+    for line in ax.lines:
+        if line.get_visible():
+            handles.append(line)
+            labels.append(line.get_label())
+
+    ax.legend(handles, labels)
     ax.figure.canvas.draw_idle()
 
 

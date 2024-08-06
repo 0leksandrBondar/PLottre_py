@@ -23,18 +23,25 @@ def initialize_plot(ax, graphs, vars):
 
         lines.extend([l_x_ang, l_y_ang, l_RSSI])
 
-    if lines:
-        ax.legend()
-
-    ax.relim()
-    ax.autoscale_view()
-    ax.grid(True)
-
-    # Установите видимость линий в соответствии с состоянием чекбоксов
+    # Устанавливаем видимость линий в соответствии с состоянием чекбоксов
     for i, line in enumerate(lines):
         if vars[i % 3].get():
             line.set_visible(True)
         else:
             line.set_visible(False)
 
+    # Обновляем легенду
+    handles, labels = [], []
+    for line in lines:
+        if line.get_visible():
+            handles.append(line)
+            labels.append(line.get_label())
+
+    if handles:
+        ax.legend(handles, labels)
+
+    ax.relim()
+    ax.autoscale_view()
+    ax.grid(True)
     ax.figure.canvas.draw_idle()
+
