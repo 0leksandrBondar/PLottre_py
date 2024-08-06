@@ -58,6 +58,22 @@ def create_load_button(time_frame):
     return btn_open
 
 
+def create_check_buttons(check_frame):
+    var_x_ang = tk.BooleanVar(value=True)
+    var_y_ang = tk.BooleanVar(value=True)
+    var_RSSI = tk.BooleanVar(value=True)
+    checkbuttons = [
+        tk.Checkbutton(check_frame, text="x_ang", variable=var_x_ang),
+        tk.Checkbutton(check_frame, text="y_ang", variable=var_y_ang),
+        tk.Checkbutton(check_frame, text="RSSI", variable=var_RSSI),
+    ]
+
+    for i, button in enumerate(checkbuttons):
+        button.grid(row=i, column=0, sticky='w', padx=5, pady=2)
+
+    return checkbuttons
+
+
 def create_displayed_graph_list_widget(bottom_frame):
     displayed_graph_list_widget = tk.Listbox(bottom_frame, exportselection=False, selectmode=tk.SINGLE, width=80,
                                              height=10)
